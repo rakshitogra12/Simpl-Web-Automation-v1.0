@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [ Web Automation Merchants Testing Suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="AutomatedTests(failed)">
+    <classes>
+      <class name="testScripts.bigBasketTestScript">
+        <methods>
+          <include name="bigBasketTestMethod"/>
+          <include name="teardown"/>
+          <include name="setup"/>
+        </methods>
+      </class> <!-- testScripts.bigBasketTestScript -->
+    </classes>
+  </test> <!-- AutomatedTests(failed) -->
+</suite> <!-- Failed suite [ Web Automation Merchants Testing Suite] -->

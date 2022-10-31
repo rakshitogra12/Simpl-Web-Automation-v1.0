@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name=" Web Automation Merchant Testing Suite">
+	<test name="Daily Reports - Integration Tests">
+		<classes>
+		<class name="testScripts.FreshToHomeTestScript">
+				<methods>
+					<include name="freshToHomeTestMethodForSuccessfullScenario" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>
