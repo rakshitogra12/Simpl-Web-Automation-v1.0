@@ -17,13 +17,13 @@ import commonMethods.ReadConfig;
 import pageObjectFiles.BigbasketFlowElements;
 import org.testng.Assert;
 
-public class bigBasketEndtoEndFlow extends BaseClass {
+public class BigBasketEndtoEndFlow extends BaseClass {
 
 	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
 	ReadConfig readconfig = new ReadConfig();
 
-	public Map<Integer, ArrayList<String>> bigBasketSuccessTestCode() throws Exception {
+	public Map<Integer, ArrayList<String>> BigBasketSuccessTestCode() throws Exception {
 
 		driver.get(readconfig.getbigBasketURL());
 
@@ -51,7 +51,9 @@ public class bigBasketEndtoEndFlow extends BaseClass {
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(BigbasketFlowElements.AddItembtn)));
 
-		driver.findElement(By.xpath(BigbasketFlowElements.AddItembtn)).click(); // Add a item here
+		driver.findElement(By.xpath(BigbasketFlowElements.AddItembtn)).click(); 
+		
+		System.out.println("Code works till here");
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(BigbasketFlowElements.Mybasketbtn)));
 
@@ -119,6 +121,7 @@ public class bigBasketEndtoEndFlow extends BaseClass {
 				String abc = "(" + xpathact2 + ")[" + pl_position + "]";
 
 				String abc1 = abc.replace(" ", "");
+				
 				WebElement element4 = driver.findElement(By.xpath(abc1));
 
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element4);
@@ -129,7 +132,7 @@ public class bigBasketEndtoEndFlow extends BaseClass {
 
 				if (eventPositiononbtn == 0) {
 
-					eventPositiononbtntext = "NO";
+					eventPositiononbtntext = "N";
 				}
 
 				wait.until(
@@ -140,8 +143,10 @@ public class bigBasketEndtoEndFlow extends BaseClass {
 				Assert.assertEquals(actualtext, "Simpl", "Simpl Option is not present on the Payment Page");
 
 				String text1 = actualtext + " Option is present on the Payment Page";
+				
+				String text2 = text1.strip().toLowerCase();
 
-				dataList.add(text1);
+				dataList.add(text2);
 
 				dataList.add(eventPositiononbtntext);
 

@@ -3,14 +3,11 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testScripts.FreshMenuTestScript">
+      <class name="testScripts.basic">
         <methods>
-          <include name="teardown"/>
-          <include name="setup"/>
-          <include name="FreshMenuTestMethodForSuccessfullScenario"/>
-          <include name="takeSnapShot"/>
+          <include name="AppiumTest"/>
         </methods>
-      </class> <!-- testScripts.FreshMenuTestScript -->
+      </class> <!-- testScripts.basic -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

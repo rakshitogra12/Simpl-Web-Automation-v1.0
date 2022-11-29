@@ -12,9 +12,9 @@ public interface DunzoFlowElements {
 
 	public static String Grocerylink = "//a[@href='/pune/grocery-stores']";
 
-	public static String Locationlink = "//a[contains(@href,'shivaji-nagar')]";
+	public static String Locationlink = "(//div[contains(@class,'cHQKYu')]/div/div/a)[1]";
 
-	public static String Addbtn = "(//button[contains(text(),'ADD')])[1]";
+	public static String Addbtn = "(//button[contains(text(),'ADD')])[3]";
 
 	public static String framelocator = "wiz-iframe";
 

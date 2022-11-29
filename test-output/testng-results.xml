@@ -2,35 +2,16 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-10-31T18:32:18 IST" name=" Web Automation Merchant Testing Suite" finished-at="2022-10-31T18:32:58 IST" duration-ms="40313">
+  <suite started-at="2022-11-29T17:42:49 IST" name="Default suite" finished-at="2022-11-29T17:42:56 IST" duration-ms="7199">
     <groups>
     </groups>
-    <test started-at="2022-10-31T18:32:18 IST" name="Daily Reports - Integration Tests" finished-at="2022-10-31T18:32:58 IST" duration-ms="40313">
-      <class name="testScripts.FreshToHomeTestScript">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testScripts.FreshToHomeTestScript@53ce1329]" started-at="2022-10-31T18:32:18 IST" name="setup" finished-at="2022-10-31T18:32:21 IST" duration-ms="3256" status="PASS">
+    <test started-at="2022-11-29T17:42:49 IST" name="Default test" finished-at="2022-11-29T17:42:56 IST" duration-ms="7199">
+      <class name="testScripts.basic">
+        <test-method signature="AppiumTest()[pri:0, instance:testScripts.basic@7133da86]" started-at="2022-11-29T17:42:49 IST" name="AppiumTest" finished-at="2022-11-29T17:42:56 IST" duration-ms="7166" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- setup -->
-        <test-method signature="freshToHomeTestMethodForSuccessfullScenario()[pri:1, instance:testScripts.FreshToHomeTestScript@53ce1329]" started-at="2022-10-31T18:32:21 IST" name="freshToHomeTestMethodForSuccessfullScenario" finished-at="2022-10-31T18:32:58 IST" duration-ms="36907" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- freshToHomeTestMethodForSuccessfullScenario -->
-        <test-method is-config="true" signature="takeSnapShot(org.testng.ITestResult)[pri:0, instance:testScripts.FreshToHomeTestScript@53ce1329]" started-at="2022-10-31T18:32:58 IST" name="takeSnapShot" finished-at="2022-10-31T18:32:58 IST" duration-ms="3" status="PASS">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA[[TestResult name=freshToHomeTestMethodForSuccessfullScenario status=SUCCESS method=FreshToHomeTestScript.freshToHomeTestMethodForSuccessfullScenario()[pri:1, instance:testScripts.FreshToHomeTestScript@53ce1329] output={null}]]]>
-              </value>
-            </param>
-          </params>
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- takeSnapShot -->
-        <test-method is-config="true" signature="teardown()[pri:0, instance:testScripts.FreshToHomeTestScript@53ce1329]" started-at="2022-10-31T18:32:58 IST" name="teardown" finished-at="2022-10-31T18:32:58 IST" duration-ms="114" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- teardown -->
-      </class> <!-- testScripts.FreshToHomeTestScript -->
-    </test> <!-- Daily Reports - Integration Tests -->
-  </suite> <!--  Web Automation Merchant Testing Suite -->
+        </test-method> <!-- AppiumTest -->
+      </class> <!-- testScripts.basic -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

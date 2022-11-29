@@ -86,7 +86,7 @@ public class ReadConfig {
 		String FreshtoHomeURL = pro.getProperty("freshtoHomeURL");
 		return FreshtoHomeURL;
 	}
-	
+
 	public String getEatsureURL() {
 
 		String EatsureURL = pro.getProperty("eatsureURL");
@@ -94,15 +94,50 @@ public class ReadConfig {
 	}
 
 	public String getTenderCutsURL() {
-		
+
 		String TenderCutsURL = pro.getProperty("tendercutsURL");
 		return TenderCutsURL;
 	}
 
 	public String getFreshMenuURL() {
-		
+
 		String FreshMenuURL = pro.getProperty("freshmenuURL");
 		return FreshMenuURL;
-}
+	}
+
+	public String getGoibiboURL() {
+
+		String goibiboURL = pro.getProperty("goibiboURL");
+		return goibiboURL;
+
+	}
+
+	public String getJioURL() {
+
+		String jioURL = pro.getProperty("jioURL");
+		return jioURL;
+
+	}
+
+	public String getNykaaURL() {
+
+		String nykaaURL = pro.getProperty("nykaaURL");
+		return nykaaURL;
+
+	}
+
+	public String getjioMartNo() {
+
+		String jioMartNo = pro.getProperty("jioMartNo");
+		return jioMartNo;
+
+	}
+
+	public String getjioMartURL() {
+
+		String jioMartURL = pro.getProperty("jioMartURL");
+		return jioMartURL;
+
+	}
 
 }

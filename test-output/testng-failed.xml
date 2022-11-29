@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [ Web Automation Merchant Testing Suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Daily Reports - Integration Tests(failed)">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testScripts.FreshToHomeTestScript">
+      <class name="testScripts.basic">
         <methods>
-          <include name="teardown"/>
-          <include name="freshToHomeTestMethodForSuccessfullScenario"/>
-          <include name="setup"/>
-          <include name="takeSnapShot"/>
+          <include name="AppiumTest"/>
         </methods>
-      </class> <!-- testScripts.FreshToHomeTestScript -->
+      </class> <!-- testScripts.basic -->
     </classes>
-  </test> <!-- Daily Reports - Integration Tests(failed) -->
-</suite> <!-- Failed suite [ Web Automation Merchant Testing Suite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

@@ -21,7 +21,7 @@ public class Tata1MGEndtoEndFlow extends BaseClass {
 
 	ReadConfig readconfig = new ReadConfig();
 
-	public Map<Integer, ArrayList<String>> tata1MGSuccessTestCode() throws Exception {
+	public Map<Integer, ArrayList<String>> Tata1MGSuccessTestCode() throws Exception {
 
 		driver.get(readconfig.getTata1MGURL());
 
@@ -122,7 +122,7 @@ public class Tata1MGEndtoEndFlow extends BaseClass {
 
 				if (eventPositiononbtn == 0) {
 
-					eventPositiononbtntext = "NO";
+					eventPositiononbtntext = "N";
 				}
 
 				wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Tata1MGFlowElements.payLaterElement)));
@@ -132,8 +132,10 @@ public class Tata1MGEndtoEndFlow extends BaseClass {
 				Assert.assertEquals(actualtext, "Simpl", "Simpl Option is not present on the Payment Page");
 
 				String text1 = actualtext + " Option is present on the Payment Page";
+				
+				String text2 = text1.strip().toLowerCase();
 
-				dataList.add(text1);
+				dataList.add(text2);
 
 				dataList.add(eventPositiononbtntext);
 

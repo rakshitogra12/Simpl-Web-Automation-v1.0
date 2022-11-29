@@ -14,7 +14,7 @@ public class FreshMenuTestScript extends BaseClass {
 
 		FreshMenuEndtoEndFlow bbobj1 = new FreshMenuEndtoEndFlow();
 
-		Map<Integer, ArrayList<String>> pl_data = bbobj1.freshMenuSuccessTestCode();
+		Map<Integer, ArrayList<String>> pl_data = bbobj1.FreshMenuSuccessTestCode();
 
 		for (Map.Entry<Integer, ArrayList<String>> entry : pl_data.entrySet()) {
 
@@ -31,75 +31,5 @@ public class FreshMenuTestScript extends BaseClass {
 		driver.quit();
 
 	}
-
-//	@Test(priority = 2)
-//	public void bigBasketTestMethodForUnApprovedUserScenario() throws Exception {
-//
-//
-//		IxigoEndtoEndFlow bbobj1 = new IxigoEndtoEndFlow();
-//
-//		bbobj1.bigBasketBlockedTestCode();
-//
-//		System.out.println("End of Execution Successfully");
-//
-//		driver.quit();
-//
-//	}
-//
-//
-//	@Test(priority = 3)
-//	public void bigBasketTestMethodForInsufficientCreditScenario() throws Exception {
-//
-//		IxigoEndtoEndFlow bbobj1 = new IxigoEndtoEndFlow();
-//
-//		bbobj1.bigBasketInsufficentCreditTestCode();
-//
-//		System.out.println("End of Execution Successfully");
-//
-//		driver.quit();
-//
-//	}
-//
-//	@Test(priority = 4)
-//	public void bigBasketTestMethodForUnabletoProcessScenario() throws Exception {
-//
-//		IxigoEndtoEndFlow bbobj1 = new IxigoEndtoEndFlow();
-//
-//		bbobj1.bigBasketUnableToProcessTestCode();
-//
-//		System.out.println("End of Execution Successfully");
-//
-//		driver.quit();
-//
-//	}
-//
-//	@Test(priority = 5)
-//	public void bigBasketTestMethodForPendingBillScenario() throws Exception {
-//
-//		IxigoEndtoEndFlow bbobj1 = new IxigoEndtoEndFlow();
-//
-//		bbobj1.bigBasketpendingBillTestCode();
-//
-//		System.out.println("End of Execution Successfully");
-//
-//		driver.quit();
-//
-//	}
-//
-//	
-//	@Test(priority = 6)
-//	public void bigBasketTestMethodForOtherScenario() throws Exception {
-//
-//		IxigoEndtoEndFlow bbobj1 = new IxigoEndtoEndFlow();
-//
-//		bbobj1.bigBasketOtherScenarioCode();
-//
-//		System.out.println("End of Execution Successfully");
-//
-//		driver.quit();
-//
-//	}
-//	
-//}
 
 }

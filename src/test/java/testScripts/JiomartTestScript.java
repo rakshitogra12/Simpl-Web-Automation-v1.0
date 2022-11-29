@@ -11,11 +11,11 @@ import testEndtoEndFlows.JioMartEndtoEndFlow;
 public class JiomartTestScript extends BaseClass {
 
 	@Test(priority = 1)
-	public void jiomartTestMethodSuccessfullScenario() throws Exception {
+	public void JiomartTestMethodSuccessfullScenario() throws Exception {
 
 		JioMartEndtoEndFlow jmobj1 = new JioMartEndtoEndFlow();
 
-		Map<Integer, ArrayList<String>> pl_data = jmobj1.jioMartSuccessfulScenarioCode();
+		Map<Integer, ArrayList<String>> pl_data = jmobj1.JioMartSuccessfulScenarioCode();
 
 		for (Entry<Integer, ArrayList<String>> entry : pl_data.entrySet()) {
 

@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -20,9 +19,20 @@ public class ReadandWriteExcel {
 
 		XSSFWorkbook wb = new XSSFWorkbook(fis);
 
+		int rowvalue = 0;
+
 		XSSFSheet sheet = wb.getSheet("Daily Report(Automated)");
 
-		XSSFRow row = sheet.getRow(10);
+		for (int i = 1; i < sheet.getLastRowNum(); i++) {
+
+			if (sheet.getRow(i).getCell(0).getStringCellValue().contains(merchantName)) {
+
+				rowvalue = i;
+
+			}
+		}
+
+		XSSFRow row = sheet.getRow(rowvalue);
 
 		XSSFCell cell = row.createCell(7);
 
@@ -42,18 +52,23 @@ public class ReadandWriteExcel {
 			cell1.setCellValue(plposition + "st");
 
 		}
+
 		if (plposition == 2) {
 
 			cell1.setCellValue(plposition + "nd");
+
 		}
+
 		if (plposition == 3) {
 
-			cell1.setCellValue(plposition + "3rd");
+			cell1.setCellValue(plposition + "rd");
+
 		}
 
-		else {
+		if (plposition > 3 && plposition < 20) {
 
 			cell1.setCellValue(plposition + "th");
+
 		}
 
 		XSSFCell cell2 = row.createCell(6);

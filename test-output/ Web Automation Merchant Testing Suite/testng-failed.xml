@@ -3,14 +3,14 @@
 <suite name="Failed suite [ Web Automation Merchant Testing Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Daily Reports - Integration Tests(failed)">
     <classes>
-      <class name="testScripts.FreshToHomeTestScript">
+      <class name="testScripts.DunzoTestScript">
         <methods>
+          <include name="DunzoTestMethodForSuccessTestScenario"/>
           <include name="teardown"/>
-          <include name="freshToHomeTestMethodForSuccessfullScenario"/>
           <include name="setup"/>
           <include name="takeSnapShot"/>
         </methods>
-      </class> <!-- testScripts.FreshToHomeTestScript -->
+      </class> <!-- testScripts.DunzoTestScript -->
     </classes>
   </test> <!-- Daily Reports - Integration Tests(failed) -->
 </suite> <!-- Failed suite [ Web Automation Merchant Testing Suite] -->

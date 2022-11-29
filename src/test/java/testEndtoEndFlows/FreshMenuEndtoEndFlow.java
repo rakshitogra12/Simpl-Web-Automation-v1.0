@@ -21,7 +21,7 @@ public class FreshMenuEndtoEndFlow extends BaseClass {
 
 	ReadConfig readconfig = new ReadConfig();
 
-	public Map<Integer, ArrayList<String>> freshMenuSuccessTestCode() throws Exception {
+	public Map<Integer, ArrayList<String>> FreshMenuSuccessTestCode() throws Exception {
 
 		driver.get(readconfig.getFreshMenuURL());
 
@@ -121,7 +121,7 @@ public class FreshMenuEndtoEndFlow extends BaseClass {
 
 				if (eventPositiononbtn == 0) {
 
-					eventPositiononbtntext = "NO";
+					eventPositiononbtntext = "N";
 				}
 
 				wait.until(ExpectedConditions

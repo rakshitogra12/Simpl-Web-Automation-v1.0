@@ -11,7 +11,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import commonMethods.BaseClass;
 import commonMethods.ReadConfig;
 
@@ -91,29 +90,20 @@ public class NetMedsEndtoEndFlow extends BaseClass {
 
 		driver.findElement(By.cssSelector("button[id='pay-button']")).click();
 
-		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By
-				.cssSelector("ul[id='paymentul']>li[style=\"display: block;\"]>div[class='title ng-star-inserted']")));
+		wait.until(
+				ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//ul[@id='paymentul']/li/div[1]")));
 
-		List<WebElement> payMethodList = driver.findElements(
-				By.cssSelector("ul[id='paymentul']>li[style=\"display: block;\"]>div[class='title ng-star-inserted']"));
+		List<WebElement> payMethodList = driver.findElements(By.xpath("//ul[@id='paymentul']/li/div[1]"));
 
 		for (int i = 0; i < payMethodList.size(); i++) {
 
-			String payMethodName = payMethodList.get(i).getText();
-
-			if (i == 5) {
-
-				System.out.println("Name is as follows"+ payMethodName);
-
-			}
+			String payMethodName = payMethodList.get(i).getAttribute("innerText");
 
 			pl_position = (i + 1);
 
-//			if (payMethodList.get(i).isDisplayed()) {
-
 			if (payMethodName.contains("PAY LATER")) {
 
-				System.out.println("Pay Later Option is present on the No. " + (i + 1) + " position");
+				System.out.println("Pay Later Option is present on the No. " + pl_position + " position");
 
 //				String xpathactual = payMethodList.get(i).toString();
 //
@@ -151,22 +141,15 @@ public class NetMedsEndtoEndFlow extends BaseClass {
 //
 //				dataValues.put(pl_position, dataList);
 
-				// print command that Simpl is present on the Big Basket- Web Application
-				// Checkout Page for email shooting
-
 			}
 
 			else {
 
 				System.out.println("Pay Later Option is not present on the No." + pl_position + " position");
 
-				// print command that Simpl is not present on the Big Basket- Web Application
-				// Checkout Page for email shooting
-
 			}
 		}
 
-//		}
 		return dataValues;
 
 	}

@@ -4,11 +4,11 @@
 <suite name=" Web Automation Merchant Testing Suite">
 	<test name="Daily Reports - Integration Tests">
 		<classes>
-		<class name="testScripts.FreshToHomeTestScript">
+		<class name="testScripts.EatSureTestScript">
 				<methods>
-					<include name="freshToHomeTestMethodForSuccessfullScenario" />
+					<include name="EatSureTestMethodForSuccessfullScenario" />
 				</methods>
 			</class>
 		</classes>
 	</test>
-</suite>
+</suite>	

@@ -92,6 +92,8 @@ public class TenderCutsEndtoEndFlow extends BaseClass {
 		driver.findElement(By.cssSelector("button[class='mat-raised-button mat-primary']")).click();
 
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("div[id='v-pills-tab']>a")));
+		
+		Thread.sleep(5000);
 
 		List<WebElement> payMethodList = driver.findElements(By.cssSelector("div[id='v-pills-tab']>a"));
 
