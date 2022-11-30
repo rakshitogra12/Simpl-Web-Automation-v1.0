@@ -52,6 +52,19 @@ public class DunzoEndtoEndFlow extends BaseClass {
 
 		Thread.sleep(15000);
 
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//p[contains(text(),'SET LOCATION')]")));
+
+		driver.findElement(By.xpath("//p[contains(text(),'SET LOCATION')]")).click();
+
+		wait.until(ExpectedConditions.elementToBeClickable(
+				By.cssSelector("div[class='sc-AxjAm StDqM sc-5mb6ac-0 gFfvoJ']>div:nth-child(3)>div>p:nth-child(1)")));
+
+		driver.findElement(
+				By.cssSelector("div[class='sc-AxjAm StDqM sc-5mb6ac-0 gFfvoJ']>div:nth-child(3)>div>p:nth-child(1)"))
+				.click();
+
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(DunzoFlowElements.Grocerylink)));
+
 		driver.findElement(By.xpath(DunzoFlowElements.Grocerylink)).click();
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(DunzoFlowElements.Locationlink)));
@@ -74,10 +87,6 @@ public class DunzoEndtoEndFlow extends BaseClass {
 
 		driver.findElement(By.xpath(DunzoFlowElements.checkoutbtn)).click();
 
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(DunzoFlowElements.addressbtn)));
-
-		driver.findElement(By.xpath(DunzoFlowElements.addressbtn)).click();
-		
 		wait.until(ExpectedConditions.elementToBeClickable(By.xpath(DunzoFlowElements.selectTimebtn)));
 
 		driver.findElement(By.xpath(DunzoFlowElements.selectTimebtn)).click();

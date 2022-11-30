@@ -62,15 +62,13 @@ public class EatSureEndtoEndFlow extends BaseClass {
 		driver.findElement(By.cssSelector("div[class=\"style__ListContainer-sc-1nogo41-9 cPORqb\"]>a:nth-child(1)"))
 				.click();
 
-		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[data-qa=\"addButton\"]")));
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@data-qa='addButton'])[2]")));
 
-//		Thread.sleep(5000);
-		
-		driver.findElement(By.cssSelector("button[data-qa=\"addButton\"]")).click();
+		driver.findElement(By.xpath("(//button[@data-qa='addButton'])[2]")).click();
 
-		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[data-qa=\"addItemButton\"]")));
+//		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[data-qa=\"addItemButton\"]")));
 
-		driver.findElement(By.cssSelector("button[data-qa=\"addItemButton\"]")).click();
+//		driver.findElement(By.cssSelector("button[data-qa=\"addItemButton\"]")).click();
 
 		wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("p[data-qa='cartOption']")));
 

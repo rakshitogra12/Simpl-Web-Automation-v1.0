@@ -4,9 +4,9 @@
 <suite name=" Web Automation Merchant Testing Suite">
 	<test name="Daily Reports - Integration Tests">
 		<classes>
-		<class name="testScripts.EatSureTestScript">
+		<class name="testScripts.DunzoTestScript">
 				<methods>
-					<include name="EatSureTestMethodForSuccessfullScenario" />
+					<include name="DunzoTestMethodForSuccessTestScenario" />
 				</methods>
 			</class>
 		</classes>
