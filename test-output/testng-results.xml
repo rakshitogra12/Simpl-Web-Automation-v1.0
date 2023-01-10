@@ -2,35 +2,35 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-11-30T14:30:13 IST" name=" Web Automation Merchant Testing Suite" finished-at="2022-11-30T14:31:06 IST" duration-ms="53192">
+  <suite started-at="2023-01-10T10:57:30 IST" name="Web Automation Merchant Testing Suite" finished-at="2023-01-10T10:59:37 IST" duration-ms="126535">
     <groups>
     </groups>
-    <test started-at="2022-11-30T14:30:13 IST" name="Daily Reports - Integration Tests" finished-at="2022-11-30T14:31:06 IST" duration-ms="53192">
-      <class name="testScripts.DunzoTestScript">
-        <test-method is-config="true" signature="setup()[pri:0, instance:testScripts.DunzoTestScript@36916eb0]" started-at="2022-11-30T14:30:13 IST" name="setup" finished-at="2022-11-30T14:30:18 IST" duration-ms="5599" status="PASS">
+    <test started-at="2023-01-10T10:57:30 IST" name="Daily Reports - Integration Tests" finished-at="2023-01-10T10:59:37 IST" duration-ms="126535">
+      <class name="plTestScripts.FreshMenuTestScript">
+        <test-method is-config="true" signature="setup()[pri:0, instance:plTestScripts.FreshMenuTestScript@5a56cdac]" started-at="2023-01-10T10:57:30 IST" name="setup" finished-at="2023-01-10T10:57:36 IST" duration-ms="5323" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="DunzoTestMethodForSuccessTestScenario()[pri:1, instance:testScripts.DunzoTestScript@36916eb0]" started-at="2022-11-30T14:30:18 IST" name="DunzoTestMethodForSuccessTestScenario" finished-at="2022-11-30T14:31:06 IST" duration-ms="47557" status="PASS">
+        <test-method signature="FreshMenuTestMethodForSuccessfullScenario()[pri:1, instance:plTestScripts.FreshMenuTestScript@5a56cdac]" started-at="2023-01-10T10:57:36 IST" name="FreshMenuTestMethodForSuccessfullScenario" finished-at="2023-01-10T10:59:37 IST" duration-ms="121170" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- DunzoTestMethodForSuccessTestScenario -->
-        <test-method is-config="true" signature="takeSnapShot(org.testng.ITestResult)[pri:0, instance:testScripts.DunzoTestScript@36916eb0]" started-at="2022-11-30T14:31:06 IST" name="takeSnapShot" finished-at="2022-11-30T14:31:06 IST" duration-ms="3" status="PASS">
+        </test-method> <!-- FreshMenuTestMethodForSuccessfullScenario -->
+        <test-method is-config="true" signature="takeSnapShot(org.testng.ITestResult)[pri:0, instance:plTestScripts.FreshMenuTestScript@5a56cdac]" started-at="2023-01-10T10:59:37 IST" name="takeSnapShot" finished-at="2023-01-10T10:59:37 IST" duration-ms="3" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[[TestResult name=DunzoTestMethodForSuccessTestScenario status=SUCCESS method=DunzoTestScript.DunzoTestMethodForSuccessTestScenario()[pri:1, instance:testScripts.DunzoTestScript@36916eb0] output={null}]]]>
+                <![CDATA[[TestResult name=FreshMenuTestMethodForSuccessfullScenario status=SUCCESS method=FreshMenuTestScript.FreshMenuTestMethodForSuccessfullScenario()[pri:1, instance:plTestScripts.FreshMenuTestScript@5a56cdac] output={null}]]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- takeSnapShot -->
-        <test-method is-config="true" signature="teardown()[pri:0, instance:testScripts.DunzoTestScript@36916eb0]" started-at="2022-11-30T14:31:06 IST" name="teardown" finished-at="2022-11-30T14:31:06 IST" duration-ms="1" status="PASS">
+        <test-method is-config="true" signature="teardown()[pri:0, instance:plTestScripts.FreshMenuTestScript@5a56cdac]" started-at="2023-01-10T10:59:37 IST" name="teardown" finished-at="2023-01-10T10:59:37 IST" duration-ms="0" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- teardown -->
-      </class> <!-- testScripts.DunzoTestScript -->
+      </class> <!-- plTestScripts.FreshMenuTestScript -->
     </test> <!-- Daily Reports - Integration Tests -->
-  </suite> <!--  Web Automation Merchant Testing Suite -->
+  </suite> <!-- Web Automation Merchant Testing Suite -->
 </testng-results>

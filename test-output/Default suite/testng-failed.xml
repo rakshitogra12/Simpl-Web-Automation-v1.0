@@ -3,11 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="testScripts.basic">
+      <class name="plTestScripts.bigBasketTestScript">
         <methods>
-          <include name="AppiumTest"/>
+          <include name="teardown"/>
+          <include name="setup"/>
+          <include name="takeSnapShot"/>
+          <include name="bigBasketTestMethodForSuccessTransactionScenario"/>
         </methods>
-      </class> <!-- testScripts.basic -->
+      </class> <!-- plTestScripts.bigBasketTestScript -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

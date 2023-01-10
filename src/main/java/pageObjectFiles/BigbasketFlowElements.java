@@ -10,19 +10,15 @@ public interface BigbasketFlowElements {
 
 	public static String VerifyOTPbtn = "#login > login > div > div:nth-child(2) > form > button";
 
-	public static String AddItembtn = "(//button[contains(@class,'btn btn-add')])[1]";
+	public static String AddItembtn = "//button[contains(text(),'Add')][1]";
 
-	public static String Mybasketbtn = "//a[@qa='myBasket']";
+	public static String Mybasketbtn = "//a[@href='/basket/?nc=nb']";
+
+	public static String gotItBtn = "//button[contains(text(),'Got it')]";
 
 	public static String Checkoutbtn = "//button[contains(text(),'Checkout')]";
 
-	public static String Checkoutbtn2 = "button#checkout";
-
-	public static String deliverHere = "a[qa='deliverHereCKO']";
-
-	public static String handleCartbtn = "//button[contains(@ng-click,'handleCart')]";
-
-	public static String confirmSlotbtn = "//button[contains(@qa,'confirmSlotBtn')]";
+	public static String ContinuetoPaymentsbtn = "//button[contains(text(),'Continue to Payments')]";
 
 	public static String juspayFrame = "//iframe[@id='juspay_iframe']";
 

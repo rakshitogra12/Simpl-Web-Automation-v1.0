@@ -12,7 +12,7 @@ public interface DunzoFlowElements {
 
 	public static String Grocerylink = "//a[@href='/order/grocery-stores']";
 
-	public static String Locationlink = "(//div[contains(@class,'cHQKYu')]/div/div/a)[1]";
+	public static String Locationlink = "(//a[contains(@href,'xpress-mart')])[1]";
 
 	public static String Addbtn = "(//button[contains(text(),'ADD')])[3]";
 

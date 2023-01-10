@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Tachyon Web Automation Merchant Testing Suite">
+	<test name="Integration Tests" >
+		<classes>
+			<class name="tachyonTestScripts_MWeb.MuseWearablesTestScript">
+				<methods>
+					<include name="MuseWearablesaMethodPriceComparisonScenario" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>

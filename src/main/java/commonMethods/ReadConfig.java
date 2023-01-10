@@ -135,8 +135,113 @@ public class ReadConfig {
 
 	public String getjioMartURL() {
 
-		String jioMartURL = pro.getProperty("jioMartURL");
+		String jioMartURL = pro.getProperty("jiomartURL");
 		return jioMartURL;
+
+	}
+
+	public String geturbanPitaraURL() {
+
+		String urbanPitaraURL = pro.getProperty("urbanPitaraURL");
+		return urbanPitaraURL;
+
+	}
+
+	public String getmuseWearablesURL() {
+
+		String museWearablesURL = pro.getProperty("museWearablesURL");
+		return museWearablesURL;
+
+	}
+
+	public String getscitronURL() {
+
+		String scitronURL = pro.getProperty("scitronURL");
+		return scitronURL;
+
+	}
+
+	public String getclassicuirURL() {
+
+		String classicuirURL = pro.getProperty("classicuirURL");
+		return classicuirURL;
+
+	}
+
+	public String getcrownchiURL() {
+
+		String crownchiURL = pro.getProperty("crownchiURL");
+		return crownchiURL;
+
+	}
+
+	public String getklaxonhomesURL() {
+
+		String klaxonhomesURL = pro.getProperty("klaxonhomesURL");
+		return klaxonhomesURL;
+
+	}
+
+	public String getruheIndiaURL() {
+
+		String ruheIndiaURL = pro.getProperty("ruheIndiaURL");
+		return ruheIndiaURL;
+
+	}
+
+	public String getfridoURL() {
+
+		String fridoURL = pro.getProperty("fridoURL");
+		return fridoURL;
+
+	}
+
+	public String getmarkmorphyURL() {
+
+		String markmorphyURL = pro.getProperty("markmorphyURL");
+		return markmorphyURL;
+
+	}
+
+	public String getwellversedURL() {
+
+		String wellversedURL = pro.getProperty("wellversedURL");
+		return wellversedURL;
+
+	}
+
+	public String getruseURL() {
+
+		String ruseURL = pro.getProperty("ruseURL");
+		return ruseURL;
+
+	}
+
+	public String getfansarmyURL() {
+
+		String fansarmyURL = pro.getProperty("fansarmyURL");
+		return fansarmyURL;
+
+	}
+
+	public String getSeuteURL() {
+
+		String seuteURL = pro.getProperty("seuteURL");
+		return seuteURL;
+
+	}
+
+	public String getZenvistaPackagingsURL() {
+
+		String zenvistapackagingsURL = pro.getProperty("zenvistapackagingsURL");
+		return zenvistapackagingsURL;
+
+	}
+
+	public String getNaaginSaucesURL() {
+
+		String naaginsaucesURL = pro.getProperty("naaginsaucesURL");
+		return naaginsaucesURL;
 
 	}
 
