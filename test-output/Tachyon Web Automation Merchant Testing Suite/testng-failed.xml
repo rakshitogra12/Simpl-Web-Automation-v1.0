@@ -3,14 +3,14 @@
 <suite name="Failed suite [Tachyon Web Automation Merchant Testing Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Integration Tests(failed)">
     <classes>
-      <class name="tachyonTestScripts_MWeb.MuseWearablesTestScript">
+      <class name="tachyonTestScripts.ChargingcableTestScript">
         <methods>
+          <include name="ChargingcableMethodCTAButtonStatusCheck"/>
           <include name="teardown"/>
           <include name="setup"/>
-          <include name="MuseWearablesaMethodPriceComparisonScenario"/>
           <include name="takeSnapShot"/>
         </methods>
-      </class> <!-- tachyonTestScripts_MWeb.MuseWearablesTestScript -->
+      </class> <!-- tachyonTestScripts.ChargingcableTestScript -->
     </classes>
   </test> <!-- Integration Tests(failed) -->
 </suite> <!-- Failed suite [Tachyon Web Automation Merchant Testing Suite] -->

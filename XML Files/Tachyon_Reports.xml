@@ -4,9 +4,9 @@
 <suite name="Tachyon Web Automation Merchant Testing Suite">
 	<test name="Integration Tests" >
 		<classes>
-			<class name="tachyonTestScripts.UrbanPitaraTestScript">
+			<class name="tachyonTestScripts.ChargingcableTestScript">
 				<methods>
-					<include name="UrbanPitaraMethodUsingPDPPageButtonApprovedScenario" />
+					<include name="ChargingcableMethodCTAButtonStatusCheck" />
 				</methods>
 			</class>
 		</classes>

@@ -2,17 +2,21 @@ package tachyonTestScripts;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.ArrayList;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import commonMethods.BaseClass;
 import commonMethods.ReadConfig;
+import commonMethods.Read_Write_Excel_Tachyon;
 
 public class MuseWearablesTestScript extends BaseClass {
 
@@ -326,7 +330,7 @@ public class MuseWearablesTestScript extends BaseClass {
 	}
 
 	@Test(priority = 5)
-	public void MuseWearablesaMethodPriceComparisonScenario() throws Exception {
+	public void MuseWearablesMethodPriceComparisonScenario() throws Exception {
 
 		driver.get(readconfig.getmuseWearablesURL());
 
@@ -348,21 +352,22 @@ public class MuseWearablesTestScript extends BaseClass {
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();",
 				driver.findElement(By.cssSelector("button[name='add']")));
 
-		new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions
-				.presenceOfElementLocated(By.xpath("//a[contains(text(),'Muse Modernist')]")));
+		new WebDriverWait(driver, Duration.ofSeconds(20))
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains(text(),'Muse Modernist')]")));
 
-		String productTitle_ViewCart = driver
-				.findElement(By.xpath("//a[contains(text(),'Muse Modernist')]")).getText();
-		
+		String productTitle_ViewCart = driver.findElement(By.xpath("//a[contains(text(),'Muse Modernist')]")).getText();
+
 		String qtyText_ViewCart = "Qty: "
-				+ driver.findElement(By.id("miniupdates_42195761135774:b702c1c0a4fd39df8135040cefc4cdba")).getAttribute("value");
+				+ driver.findElement(By.id("miniupdates_42195761135774:b702c1c0a4fd39df8135040cefc4cdba"))
+						.getAttribute("value");
 
-		String subTotalPrice__ViewCart = driver.findElement(By.xpath("(//span[@class='money bacurr-money'])[5]")).getText();
+		String subTotalPrice__ViewCart = driver.findElement(By.xpath("(//span[@class='money bacurr-money'])[5]"))
+				.getText();
 
 		driver.findElement(By.xpath("div[title='Add A Coupon']")).click();
-		
+
 		driver.findElement(By.id("CartDiscountcode")).sendKeys("WELCOME10");
-		
+
 		driver.findElement(By.xpath("(//button[contains(text(),'Save')])[2]")).click();
 
 		new WebDriverWait(driver, Duration.ofSeconds(20))
@@ -475,6 +480,123 @@ public class MuseWearablesTestScript extends BaseClass {
 					"Tachyon CTA Button is not getting displayed, hence Tachyon Checkout Page functionality will not be executed");
 
 		}
+
+	}
+
+	@Test(priority = 6)
+	public void MuseWearablesMethodCTAButtonStatusCheck() throws Exception {
+
+		String merchantName = "Muse Wearables";
+
+		String ctaBtnStatus_PDP = null;
+
+		String ctaBtnStatus_Ajax = null;
+
+		String ctaBtnStatus_ViewCart = null;
+
+		ArrayList<String> statusList = new ArrayList<String>();
+
+		driver.get(readconfig.getmuseWearablesURL());
+
+		driver.manage().window().maximize();
+
+		driver.findElement(By.xpath("(//a[contains(text(),'Muse Watch')])[1]")).click();
+
+		new WebDriverWait(driver, Duration.ofSeconds(10))
+				.until(ExpectedConditions.elementToBeClickable(By.id("b_1658468328ef075bd2-3")));
+
+		driver.findElement(By.id("b_1658468328ef075bd2-3")).click();
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+				driver.findElement(By.xpath("(//span[contains(text(),'Buy Now')])[1]")));
+
+		try {
+
+			if (driver.findElement(By.xpath("(//button[@id=\"simpl_buynow-button\"])[2]")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on PDP Page");
+
+				ctaBtnStatus_PDP = "PASS";
+
+			}
+
+			else {
+
+				System.out.println("Simpl Button is not getting displayed.");
+
+				ctaBtnStatus_PDP = "FAIL";
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on PDP Page");
+
+			ctaBtnStatus_PDP = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_PDP);
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+				driver.findElement(By.cssSelector("button[name='add']")));
+
+		try {
+
+			if (driver.findElement(By.xpath("(//button[@id=\"simpl_buynow-button\"])[2]")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on Ajax Cart Page");
+
+				ctaBtnStatus_Ajax = "PASS";
+			}
+
+			else {
+
+				System.out.println("Tachyon CTA Button is not getting displayed on Ajax Page");
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on Ajax Cart Page");
+
+			ctaBtnStatus_Ajax = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Ajax);
+
+		Thread.sleep(6000);
+
+		driver.switchTo().newWindow(WindowType.TAB);
+
+		driver.get("https://in.musewearables.com/cart");
+
+		try {
+
+			if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button\'])[2]")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on View Cart Page");
+
+				ctaBtnStatus_Ajax = "PASS";
+			}
+
+			else {
+
+				System.out.println("View Cart Section is visible but Tachyon CTA Button is not");
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on View Cart Page");
+
+			ctaBtnStatus_ViewCart = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_ViewCart);
+
+		Read_Write_Excel_Tachyon obj = new Read_Write_Excel_Tachyon();
+
+		obj.ReadExcelLoginMethodStatusCheck(statusList, merchantName);
 
 	}
 

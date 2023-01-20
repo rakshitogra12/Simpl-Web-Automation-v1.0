@@ -245,4 +245,77 @@ public class ReadConfig {
 
 	}
 
+	public String getFitspirefitsURL() {
+
+		String fitspirefitURL = pro.getProperty("fitspirefitURL");
+		return fitspirefitURL;
+
+	}
+
+	public String getBonbenoURL() {
+
+		String bonbenoURL = pro.getProperty("bonbenoURL");
+		return bonbenoURL;
+
+	}
+
+	public String getAdivedaNaturalURL() {
+
+		String adivedaNaturalURL = pro.getProperty("adivedaNaturalURL");
+		return adivedaNaturalURL;
+
+	}
+
+	public String getFridoMaskURL() {
+
+		String fridoMaskURL = pro.getProperty("fridoMaskURL");
+		return fridoMaskURL;
+
+	}
+
+	public String getMizunoURL() {
+
+		String mizunoURL = pro.getProperty("mizunoURL");
+		return mizunoURL;
+
+	}
+
+	public String getThreepiececompanyURL() {
+
+		String threepiececompanyURL = pro.getProperty("threepiececompanyURL");
+		return threepiececompanyURL;
+
+	}
+
+	public String getFitspireonlineURL() {
+
+		String fitspireonlineURL = pro.getProperty("fitspireonlineURL");
+		return fitspireonlineURL;
+
+	}
+
+	public String getAyasgoldURL() {
+
+		String ayasgoldURL = pro.getProperty("ayasgoldURL");
+		return ayasgoldURL;
+
+	}
+
+	public String getForestreatsURL() {
+
+		String forestreatsURL = pro.getProperty("forestreatsURL");
+		return forestreatsURL;
+
+	}
+
+	public String getChargingcableURL() {
+
+		String chargingcableURL = pro.getProperty("chargingcableURL");
+		return chargingcableURL;
+
+	}
+	
+	
+	
+	
 }

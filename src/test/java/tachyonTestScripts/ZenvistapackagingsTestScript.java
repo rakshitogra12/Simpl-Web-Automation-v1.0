@@ -1,8 +1,10 @@
 package tachyonTestScripts;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,6 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import commonMethods.BaseClass;
 import commonMethods.ReadConfig;
+import commonMethods.Read_Write_Excel_Tachyon;
 
 public class ZenvistapackagingsTestScript extends BaseClass {
 
@@ -233,4 +236,108 @@ public class ZenvistapackagingsTestScript extends BaseClass {
 
 	}
 
+	@Test(priority = 6)
+	public void ZenvistapackagingsMethodCTAButtonStatusCheck() throws Exception {
+
+		String merchantName = "Zenvista Packagings";
+
+		String ctaBtnStatus_PDP = null;
+
+		String ctaBtnStatus_Ajax = null;
+
+		String ctaBtnStatus_ViewCart = null;
+
+		ArrayList<String> statusList = new ArrayList<String>();
+
+		driver.get(readconfig.getZenvistaPackagingsURL());
+
+		driver.manage().window().maximize();
+
+		WebElement element1 = driver.findElement(By.xpath(
+				"(//a[contains(@href,'empty-black-color-cosmetic-jars-with-rose-gold-cap-and-silver-streak-50gm-pack-of-10')])[1]"));
+
+		Actions builder = new Actions(driver);
+
+		Action mouseOverHome1 = builder.moveToElement(element1).click().build();
+
+		mouseOverHome1.perform();
+			
+		try {
+
+			if (driver.findElement(By.xpath("//button[@id='simpl_buynow-button']")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on PDP Page");
+
+				ctaBtnStatus_PDP = "PASS";
+
+			}
+
+			else {
+
+				System.out.println("Tachyon CTA Button is not getting displayed on POP page");
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on PDP Page");
+
+			ctaBtnStatus_PDP = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_PDP);
+		
+		WebElement element2 = driver.findElement(By.xpath("(//button[@name='add'])[1]"));
+
+		Action mouseOverHome2 = builder.moveToElement(element2).click().build();
+
+		mouseOverHome2.perform();
+
+		System.out.println("Since Ajax Cart Page is not getting displayed, Tachyon button cannot be visible.");
+
+		ctaBtnStatus_Ajax = "N/A";
+
+		statusList.add(ctaBtnStatus_Ajax);
+
+		Thread.sleep(3000);
+
+		driver.switchTo().newWindow(WindowType.TAB);
+
+		driver.get("https://zenvistapackagings.in/cart");
+		
+		new WebDriverWait(driver, Duration.ofSeconds(20)).until(
+				ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@id='simpl_buynow-button']")));
+
+		try {
+
+			if (driver.findElement(By.xpath("//button[@id='simpl_buynow-button']")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on View Cart Page");
+
+				ctaBtnStatus_ViewCart = "PASS";
+			}
+
+			else {
+
+				System.out.println("View Cart Section is visible but Tachyon CTA Button is not");
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on View Cart Page");
+
+			ctaBtnStatus_ViewCart = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_ViewCart);
+
+		Read_Write_Excel_Tachyon obj = new Read_Write_Excel_Tachyon();
+
+		obj.ReadExcelLoginMethodStatusCheck(statusList, merchantName);
+
+	}
+
+	
+	
 }

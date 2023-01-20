@@ -3,14 +3,14 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="plTestScripts.bigBasketTestScript">
+      <class name="tachyonTestScripts.UrbanPitaraTestScript">
         <methods>
           <include name="teardown"/>
           <include name="setup"/>
+          <include name="UrbanPitaraMethodCTAButtonStatusCheck"/>
           <include name="takeSnapShot"/>
-          <include name="bigBasketTestMethodForSuccessTransactionScenario"/>
         </methods>
-      </class> <!-- plTestScripts.bigBasketTestScript -->
+      </class> <!-- tachyonTestScripts.UrbanPitaraTestScript -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

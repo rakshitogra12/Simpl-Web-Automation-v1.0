@@ -2,12 +2,14 @@ package tachyonTestScripts;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.ArrayList;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,6 +17,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import commonMethods.BaseClass;
 import commonMethods.ReadConfig;
+import commonMethods.Read_Write_Excel_Tachyon;
 
 public class FansArmyTestScript extends BaseClass {
 
@@ -225,6 +228,95 @@ public class FansArmyTestScript extends BaseClass {
 		Assert.assertEquals(otpText, "Invalid OTP", "Invalid OTP text is not present on the OTP Page");
 
 		System.out.println("Invalid OTP text is present on the OTP Page");
+
+	}
+
+	@Test(priority = 4)
+	public void FansArmyMethodCTAButtonStatusCheck() throws Exception {
+
+		String merchantName = "Fans Army";
+
+		String ctaBtnStatus_PDP = null;
+
+		String ctaBtnStatus_Ajax = null;
+
+		String ctaBtnStatus_Cart = null;
+
+		ArrayList<String> statusList = new ArrayList<String>();
+
+		driver.get(readconfig.getfansarmyURL());
+
+		driver.manage().window().maximize();
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+				driver.findElement(By.xpath("(//div[@class='product']/div/div/div/div/a)[17]")));
+
+		try {
+
+			if (driver.findElement(By.cssSelector("button[id='simpl_buynow-button']")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on PDP Page");
+
+				ctaBtnStatus_PDP = "PASS";
+
+			} else {
+
+				System.out.println("Tachyon CTA Button is not getting displayed on PDP Page");
+
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA Button is not present on PDP Page");
+
+			ctaBtnStatus_PDP = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_PDP);
+
+		driver.findElement(By.xpath("(//label/span[contains(text(),'L')])[1]")).click();
+
+		driver.findElement(By.cssSelector("button[name='add']")).click();
+
+		System.out.println("Ajax Cart is not present hence Tachyon CTA Button cannot be present");
+
+		ctaBtnStatus_Ajax = "N/A";
+
+		statusList.add(ctaBtnStatus_Ajax);
+
+		Thread.sleep(6000);
+
+		driver.switchTo().newWindow(WindowType.TAB);
+
+		driver.get("https://www.fansarmy.in/cart");
+
+		try {
+
+			if (driver.findElement(By.cssSelector("button[id='simpl_buynow-button']")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on View Cart Page");
+
+				ctaBtnStatus_Cart = "PASS";
+
+			} else {
+
+				System.out.println("Tachyon CTA Button is not getting displayed on View Cart Page");
+
+			}
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA Button is not present on View Cart Page");
+
+			ctaBtnStatus_Cart = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Cart);
+
+		Read_Write_Excel_Tachyon obj = new Read_Write_Excel_Tachyon();
+
+		obj.ReadExcelLoginMethodStatusCheck(statusList, merchantName);
 
 	}
 

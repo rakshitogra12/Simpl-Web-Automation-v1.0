@@ -2,16 +2,19 @@ package tachyonTestScripts;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.ArrayList;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import commonMethods.BaseClass;
 import commonMethods.ReadConfig;
+import commonMethods.Read_Write_Excel_Tachyon;
 
 public class RuseTestScript extends BaseClass {
 
@@ -211,6 +214,94 @@ public class RuseTestScript extends BaseClass {
 		Assert.assertEquals(otpText, "Invalid OTP", "Invalid OTP text is not present on the OTP Page");
 
 		System.out.println("Invalid OTP text is present on the OTP Page");
+
+	}
+
+	@Test(priority = 4)
+	public void RuseMethodCTAButtonStatusCheck() throws Exception {
+
+		String merchantName = "Ruse";
+
+		String ctaBtnStatus_PDP = null;
+
+		String ctaBtnStatus_Ajax = null;
+
+		String ctaBtnStatus_Cart = null;
+
+		ArrayList<String> statusList = new ArrayList<String>();
+
+		driver.get(readconfig.getruseURL());
+
+		driver.manage().window().maximize();
+
+		driver.findElement(By.xpath("(//a[contains(@class,'grid-view-item__link')])[1]")).click();
+
+		driver.findElement(By.xpath("//label[contains(text(),'20 Gm')]")).click();
+
+		try {
+
+			if (driver.findElement(By.xpath("//button[@id='simpl_buynow-button']")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on PDP Page");
+
+				ctaBtnStatus_PDP = "PASS";
+
+			} else {
+
+				System.out.println("Simpl Button is not getting displayed on PDP Page");
+
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on PDP Page");
+
+			ctaBtnStatus_PDP = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_PDP);
+
+		driver.findElement(By.cssSelector("button[name='add']")).click();
+
+		System.out.println("Since Ajax Cart is not present hence Tachyon CTA button cannot be present.");
+
+		ctaBtnStatus_Ajax = "N/A";
+
+		statusList.add(ctaBtnStatus_Ajax);
+
+		Thread.sleep(6000);
+
+		driver.switchTo().newWindow(WindowType.TAB);
+
+		driver.get("https://www.ruse.in/cart");
+
+		try {
+
+			if (driver.findElement(By.id("simpl_buynow-button")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on View Cart Page");
+
+				ctaBtnStatus_Cart = "PASS";
+
+			} else {
+
+				System.out.println("Simpl Button is not getting displayed on View Cart Page");
+
+			}
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on View Cart Page");
+
+			ctaBtnStatus_Cart = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Cart);
+
+		Read_Write_Excel_Tachyon obj = new Read_Write_Excel_Tachyon();
+
+		obj.ReadExcelLoginMethodStatusCheck(statusList, merchantName);
 
 	}
 

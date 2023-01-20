@@ -1,14 +1,17 @@
 package tachyonTestScripts;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import commonMethods.BaseClass;
 import commonMethods.ReadConfig;
+import commonMethods.Read_Write_Excel_Tachyon;
 
 public class WellVersedTestScript extends BaseClass {
 
@@ -131,23 +134,22 @@ public class WellVersedTestScript extends BaseClass {
 		driver.findElement(By.id("phone-number")).sendKeys(readconfig.getblockedMobNo());
 
 		driver.findElement(By.cssSelector("button[data-cy=\"verify-mobile\"]")).click();
-		
+
 		driver.findElement(By.id("phone-number")).sendKeys(readconfig.getblockedMobNo());
 
 		driver.findElement(By.cssSelector("button[data-cy=\"verify-mobile\"]")).click();
-		
-		new WebDriverWait(driver, Duration.ofSeconds(10)).until(
-				ExpectedConditions.presenceOfElementLocated(By.xpath("//h5[contains(text(),'UPI')]")));
+
+		new WebDriverWait(driver, Duration.ofSeconds(10))
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h5[contains(text(),'UPI')]")));
 
 		String simplPayLatertext = driver.findElement(By.xpath("//h5[contains(text(),'UPI')]")).getText();
 
 		String buttontext = driver.findElement(By.xpath("//button[contains(text(),'CONTINUE TO PAY')]")).getText();
 
-		Assert.assertEquals(simplPayLatertext, "UPI",
-				"Simpl Pay Later text is present on the Tachyon Checkout Page");	
+		Assert.assertEquals(simplPayLatertext, "UPI", "Simpl Pay Later text is present on the Tachyon Checkout Page");
 
 		System.out.println(buttontext);
-		
+
 		System.out.println("Simpl Pay Later text is not present on the Tachyon Checkout Page");
 
 	}
@@ -186,6 +188,119 @@ public class WellVersedTestScript extends BaseClass {
 		Assert.assertEquals(otpText, "Invalid OTP", "Invalid OTP text is not present on the OTP Page");
 
 		System.out.println("Invalid OTP text is present on the OTP Page");
+
+	}
+
+	@Test(priority = 5)
+	public void WellVersedMethodCTAButtonStatusCheck() throws Exception {
+
+		String merchantName = "Wellversed";
+
+		String ctaBtnStatus_PDP = null;
+
+		String ctaBtnStatus_Ajax = null;
+
+		String ctaBtnStatus_Cart = null;
+
+		ArrayList<String> statusList = new ArrayList<String>();
+
+		driver.get(readconfig.getwellversedURL());
+
+		driver.manage().window().maximize();
+
+		Thread.sleep(5000);
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", driver.findElement(
+				By.xpath("(//a[contains(@href,'electrolyte-powder-for-instant-energy-and-hydration')])[1]")));
+
+		try {
+
+			if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[1]")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on PDP Page");
+
+				ctaBtnStatus_PDP = "PASS";
+
+			} else {
+
+				System.out.println("Simpl Button is not getting displayed on PDP Page");
+
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA Button is not getting displayed on PDP Page");
+			
+			ctaBtnStatus_PDP = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_PDP);
+
+		driver.findElement(By.cssSelector("button[id='add-to-cart']")).click();
+		
+		Thread.sleep(5000);
+
+		try {
+
+			if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[1]")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on Ajax Cart Page");
+
+				ctaBtnStatus_Ajax = "PASS";
+
+			} else {
+
+				System.out.println("Tachyon CTA Button is not getting displayed on Ajax Cart Page");
+
+			}
+		}
+
+		catch (Exception e) {
+
+			System.out.println("Tachyon CTA Button is not getting displayed on Ajax Cart Page");
+
+			ctaBtnStatus_Ajax = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Ajax);
+
+		Thread.sleep(6000);
+
+		driver.switchTo().newWindow(WindowType.TAB);
+
+		driver.get("https://wellversed.in/cart");
+
+		try {
+
+			if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[1]")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on View Cart Page");
+
+				ctaBtnStatus_Cart = "PASS";
+
+			} else {
+
+				System.out.println("Tachyon CTA Button is not getting displayed on View Cart Page");
+
+			}
+
+		}
+
+		catch (Exception e) {
+
+			System.out.println("Tachyon CTA Button is not getting displayed on View Cart Page");
+
+			ctaBtnStatus_Cart = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Cart);
+
+		Read_Write_Excel_Tachyon obj = new Read_Write_Excel_Tachyon();
+
+		obj.ReadExcelLoginMethodStatusCheck(statusList, merchantName);
 
 	}
 
