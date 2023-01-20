@@ -1,9 +1,11 @@
 package tachyonTestScripts;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,6 +14,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import commonMethods.BaseClass;
 import commonMethods.ReadConfig;
+import commonMethods.Read_Write_Excel_Tachyon;
 
 public class FridoTestScript extends BaseClass {
 
@@ -197,23 +200,22 @@ public class FridoTestScript extends BaseClass {
 		driver.findElement(By.id("phone-number")).sendKeys(readconfig.getblockedMobNo());
 
 		driver.findElement(By.cssSelector("button[data-cy=\"verify-mobile\"]")).click();
-		
+
 		driver.findElement(By.id("phone-number")).sendKeys(readconfig.getblockedMobNo());
 
 		driver.findElement(By.cssSelector("button[data-cy=\"verify-mobile\"]")).click();
-		
-		new WebDriverWait(driver, Duration.ofSeconds(10)).until(
-				ExpectedConditions.presenceOfElementLocated(By.xpath("//h5[contains(text(),'UPI')]")));
+
+		new WebDriverWait(driver, Duration.ofSeconds(10))
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h5[contains(text(),'UPI')]")));
 
 		String simplPayLatertext = driver.findElement(By.xpath("//h5[contains(text(),'UPI')]")).getText();
 
 		String buttontext = driver.findElement(By.xpath("//button[contains(text(),'CONTINUE TO PAY')]")).getText();
 
-		Assert.assertEquals(simplPayLatertext, "UPI",
-				"Simpl Pay Later text is present on the Tachyon Checkout Page");	
+		Assert.assertEquals(simplPayLatertext, "UPI", "Simpl Pay Later text is present on the Tachyon Checkout Page");
 
 		System.out.println(buttontext);
-		
+
 		System.out.println("Simpl Pay Later text is not present on the Tachyon Checkout Page");
 
 	}
@@ -242,7 +244,7 @@ public class FridoTestScript extends BaseClass {
 
 		new WebDriverWait(driver, Duration.ofSeconds(30))
 				.until(ExpectedConditions.elementToBeClickable(By.xpath("(//button[@id='simpl_buynow-button'])[1]")));
-		
+
 		WebElement element3 = driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[1]"));
 
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", element3);
@@ -262,9 +264,132 @@ public class FridoTestScript extends BaseClass {
 		String otpText = driver.findElement(By.cssSelector("span[data-cy=\"otp-error\"]")).getText();
 
 		Assert.assertEquals(otpText, "Invalid OTP", "Invalid OTP text is not present on the OTP Page");
-		
+
 		System.out.println("Invalid OTP text is present on the OTP Page");
 
+	}
+
+	@Test(priority = 6)
+	public void FridoMethodCTAButtonStatusCheck() throws Exception {
+
+		String merchantName = "My Frido";
+
+		String ctaBtnStatus_PDP = null;
+
+		String ctaBtnStatus_Ajax = null;
+
+		String ctaBtnStatus_Cart = null;
+
+		ArrayList<String> statusList = new ArrayList<String>();
+
+		driver.get(readconfig.getfridoURL());
+
+		driver.manage().window().maximize();
+
+		WebElement element1 = driver.findElement(By.xpath("(//a[contains(@href,'/collections/bestseller')])[1]"));
+
+		Actions builder = new Actions(driver);
+
+		Action mouseOverHome1 = builder.moveToElement(element1).click().build();
+
+		mouseOverHome1.perform();
+
+		WebElement element2 = driver
+				.findElement(By.xpath("(//a[contains(@href,'frido-ultimate-coccyx-seat-cushion')])[3]"));
+
+		Action mouseOverHome2 = builder.moveToElement(element2).click().build();
+
+		mouseOverHome2.perform();
+
+		try {
+
+			if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[2]")).isDisplayed()) {
+
+				System.out.println(driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[2]")).getText());
+
+				System.out.println("Tachyon CTA Button is getting displayed on PDP Page");
+
+				ctaBtnStatus_PDP = "PASS";
+
+			} else {
+
+				System.out.println("Tachyon CTA Button is not getting displayed on PDP Page");
+
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on PDP Page");
+
+			ctaBtnStatus_PDP = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_PDP);
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+				driver.findElement(By.xpath("//span[contains(text(),'ADD TO CART')]")));
+		
+		Thread.sleep(5000);
+
+		try {
+
+			if (driver.findElement(By.cssSelector("div[class='gokwik-checkout']>button")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on Ajax Cart Page");
+
+				ctaBtnStatus_Ajax = "PASS";
+
+			} else {
+
+				System.out.println("Tachyon CTA Button is not getting displayed on Ajax Cart Page");
+
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on Ajax Cart Page");
+
+			ctaBtnStatus_Ajax = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Ajax);
+
+		Thread.sleep(6000);
+
+		driver.switchTo().newWindow(WindowType.TAB);
+
+		driver.get("https://myfrido.com/cart");
+
+		try {
+
+			if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[1]")).isDisplayed()) {
+
+				System.out.println(driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[1]")).getText());
+
+				System.out.println("Tachyon CTA Button is getting displayed on View Cart Page");
+
+				ctaBtnStatus_Cart = "PASS";
+
+			} else {
+
+				System.out.println("Tachyon CTA Button is not getting displayed on View Cart Page");
+
+			}
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on View Cart Page");
+
+			ctaBtnStatus_Cart = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Cart);
+
+		Read_Write_Excel_Tachyon obj = new Read_Write_Excel_Tachyon();
+
+		obj.ReadExcelLoginMethodStatusCheck(statusList, merchantName);
 
 	}
 

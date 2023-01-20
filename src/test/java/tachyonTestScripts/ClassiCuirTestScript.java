@@ -2,11 +2,14 @@ package tachyonTestScripts;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.ArrayList;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,6 +18,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import commonMethods.BaseClass;
 import commonMethods.ReadConfig;
+import commonMethods.Read_Write_Excel_Tachyon;
 
 public class ClassiCuirTestScript extends BaseClass {
 
@@ -37,9 +41,9 @@ public class ClassiCuirTestScript extends BaseClass {
 		Action mouseOverHome1 = builder.moveToElement(element1).click().build();
 
 		mouseOverHome1.perform();
-		
+
 		new WebDriverWait(driver, Duration.ofSeconds(20))
-		.until(ExpectedConditions.elementToBeClickable(By.cssSelector("i[class='fa fa-info-circle']")));
+				.until(ExpectedConditions.elementToBeClickable(By.cssSelector("i[class='fa fa-info-circle']")));
 
 		driver.findElement(By.cssSelector("i[class='fa fa-info-circle']")).click();
 
@@ -264,6 +268,126 @@ public class ClassiCuirTestScript extends BaseClass {
 		Assert.assertEquals(otpText, "Invalid OTP", "Invalid OTP text is not present on the OTP Page");
 
 		System.out.println("Invalid OTP text is present on the OTP Page");
+
+	}
+
+	@Test(priority = 5)
+	public void ClassicCuirMethodCTAButtonStatusCheck() throws Exception {
+
+		String merchantName = "ClassicCuir";
+
+		String ctaBtnStatus_PDP = null;
+
+		String ctaBtnStatus_Ajax = null;
+
+		String ctaBtnStatus_Cart = null;
+
+		ArrayList<String> statusList = new ArrayList<String>();
+
+		driver.get(readconfig.getclassicuirURL());
+
+		driver.manage().window().maximize();
+
+		WebElement element1 = driver
+				.findElement(By.xpath("(//a[contains(@href,'/products/copy-of-versailles-woven-bowler-bag')])[1]"));
+
+		Actions builder = new Actions(driver);
+
+		Action mouseOverHome1 = builder.moveToElement(element1).click().build();
+
+		mouseOverHome1.perform();
+
+		Thread.sleep(5000);
+
+		try {
+
+			if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[1]")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on PDP Page");
+
+				ctaBtnStatus_PDP = "PASS";
+
+			} else {
+
+				System.out.println("Simpl Button is not getting displayed on PDP Page");
+
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on PDP Page");
+
+			ctaBtnStatus_PDP = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_PDP);
+
+		new WebDriverWait(driver, Duration.ofSeconds(20))
+				.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[contains(text(),'Add to cart')]")));
+
+		driver.findElement(By.xpath("//span[contains(text(),'Add to cart')]")).click();
+
+		new WebDriverWait(driver, Duration.ofSeconds(20))
+				.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[aria-label='Close']")));
+
+		driver.findElement(By.cssSelector("button[aria-label='Close']")).click();
+
+		try {
+
+			if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[1]")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on Ajax Cart Page");
+
+				ctaBtnStatus_Ajax = "PASS";
+
+			} else {
+
+				System.out.println("Simpl Button is not getting displayed on Ajax Cart Page");
+
+			}
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on Ajax Cart Page");
+
+			ctaBtnStatus_Ajax = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Ajax);
+
+		Thread.sleep(6000);
+
+		driver.switchTo().newWindow(WindowType.TAB);
+
+		driver.get("https://classicuir.com/cart");
+
+		try {
+
+			if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[1]")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on View Cart Page");
+
+				ctaBtnStatus_Cart = "PASS";
+
+			} else {
+
+				System.out.println("Simpl Button is not getting displayed on View Cart Page");
+
+			}
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on View Cart Page");
+
+			ctaBtnStatus_Cart = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Cart);
+
+		Read_Write_Excel_Tachyon obj = new Read_Write_Excel_Tachyon();
+
+		obj.ReadExcelLoginMethodStatusCheck(statusList, merchantName);
 
 	}
 

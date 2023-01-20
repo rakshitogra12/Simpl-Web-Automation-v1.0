@@ -2,18 +2,21 @@ package tachyonTestScripts;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.ArrayList;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import commonMethods.BaseClass;
 import commonMethods.ReadConfig;
+import commonMethods.Read_Write_Excel_Tachyon;
 
-public class MarkMorphyTestScripts extends BaseClass {
+public class MarkMorphyTestScript extends BaseClass {
 
 	ReadConfig readconfig = new ReadConfig();
 
@@ -244,6 +247,92 @@ public class MarkMorphyTestScripts extends BaseClass {
 		Assert.assertEquals(otpText, "Invalid OTP", "Invalid OTP text is not present on the OTP Page");
 
 		System.out.println("Invalid OTP text is present on the OTP Page");
+
+	}
+
+	@Test(priority = 5)
+	public void MarkMorphyMethodCTAButtonStatusCheck() throws Exception {
+
+		String merchantName = "Mark Morphy";
+
+		String ctaBtnStatus_PDP = null;
+
+		String ctaBtnStatus_Ajax = null;
+
+		String ctaBtnStatus_Cart = null;
+
+		ArrayList<String> statusList = new ArrayList<String>();
+
+		driver.get(readconfig.getmarkmorphyURL());
+
+		driver.manage().window().maximize();
+
+		new WebDriverWait(driver, Duration.ofSeconds(30))
+				.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Chinos')])[3]")));
+
+		driver.findElement(By.xpath("(//span[contains(text(),'Chinos')])[3]")).click();
+
+		driver.findElement(By.xpath("//a[contains(@href,'everyday-classic-stone-black-men-chinos')]")).click();
+
+		if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[2]")).isDisplayed()) {
+
+			System.out.println("Simpl Button is getting displayed on PDP Page");
+
+			ctaBtnStatus_PDP = "PASS";
+
+		} else {
+
+			System.out.println("Simpl Button is not getting displayed on PDP Page");
+
+			ctaBtnStatus_PDP = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_PDP);
+
+		driver.findElement(By.cssSelector("button[aria-label='Add to cart']")).click();
+		
+		if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[2]")).isDisplayed()) {
+
+			System.out.println("Simpl Button is getting displayed on Ajax Cart Page");
+
+			ctaBtnStatus_Ajax = "PASS";
+
+		} else {
+
+			System.out.println("Simpl Button is not getting displayed on Ajax Page");
+
+			ctaBtnStatus_Ajax = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Ajax);
+
+		Thread.sleep(6000);
+
+		driver.switchTo().newWindow(WindowType.TAB);
+
+		driver.get("https://markmorphy.com/cart");
+
+		if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[2]")).isDisplayed()) {
+
+			System.out.println("Simpl Button is getting displayed on View Cart Page");
+
+			ctaBtnStatus_Cart = "PASS";
+
+		} else {
+
+			System.out.println("Simpl Button is not getting displayed on View Cart Page");
+
+			ctaBtnStatus_Cart = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Cart);
+
+		Read_Write_Excel_Tachyon obj = new Read_Write_Excel_Tachyon();
+
+		obj.ReadExcelLoginMethodStatusCheck(statusList, merchantName);
 
 	}
 

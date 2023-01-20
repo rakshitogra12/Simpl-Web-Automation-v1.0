@@ -1,8 +1,11 @@
 package tachyonTestScripts;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,6 +14,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import commonMethods.BaseClass;
 import commonMethods.ReadConfig;
+import commonMethods.Read_Write_Excel_Tachyon;
 
 public class SeuteTestScript extends BaseClass {
 
@@ -188,12 +192,12 @@ public class SeuteTestScript extends BaseClass {
 		driver.findElement(By.id("phone-number")).sendKeys(readconfig.getsuccessMobNo());
 
 		driver.findElement(By.cssSelector("button[data-cy=\"verify-mobile\"]")).click();
-		
+
 		new WebDriverWait(driver, Duration.ofSeconds(20))
-		.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[id='otp']")));
+				.until(ExpectedConditions.elementToBeClickable(By.cssSelector("input[id='otp']")));
 
 		driver.findElement(By.cssSelector("input[id='otp']")).sendKeys("0000");
-		
+
 		Thread.sleep(5000);
 
 		String otpText = driver.findElement(By.cssSelector("span[data-cy=\"otp-error\"]")).getText();
@@ -201,6 +205,102 @@ public class SeuteTestScript extends BaseClass {
 		Assert.assertEquals(otpText, "Invalid OTP", "Invalid OTP text is not present on the OTP Page");
 
 		System.out.println("Invalid OTP text is present on the OTP Page");
+
+	}
+
+	@Test(priority = 6)
+	public void SeuteMethodCTAButtonStatusCheck() throws Exception {
+
+		String merchantName = "Seute";
+
+		String ctaBtnStatus_PDP = null;
+
+		String ctaBtnStatus_Ajax = null;
+
+		String ctaBtnStatus_ViewCart = null;
+
+		ArrayList<String> statusList = new ArrayList<String>();
+
+		driver.get(readconfig.getSeuteURL());
+
+		driver.manage().window().maximize();
+
+		WebElement element1 = driver
+				.findElement(By.xpath("(//a[contains(@href,'verdiator-laptop-backpack-vc86ee0d9d7ed')])[1]"));
+
+		Actions builder = new Actions(driver);
+
+		Action mouseOverHome1 = builder.moveToElement(element1).click().build();
+
+		mouseOverHome1.perform();
+
+		try {
+
+			if (driver.findElement(By.xpath("(//button[@id=\"simpl_buynow-button\"])[2]")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on PDP Page");
+
+				ctaBtnStatus_PDP = "PASS";
+
+			}
+
+			else {
+
+				System.out.println("Tachyon CTA Button is not getting displayed on POP page");
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on PDP Page");
+
+			ctaBtnStatus_PDP = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_PDP);
+
+		System.out.println("Since Ajax Cart Page is not getting displayed, Tachyon button cannot be visible.");
+
+		ctaBtnStatus_Ajax = "N/A";
+
+		statusList.add(ctaBtnStatus_Ajax);
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+				driver.findElement(By.cssSelector("button[name='add']")));
+
+		Thread.sleep(2000);
+
+		driver.switchTo().newWindow(WindowType.TAB);
+
+		driver.get("https://www.seute.in/cart");
+
+		try {
+
+			if (driver.findElement(By.id("simpl_buynow-button")).isDisplayed()) {
+
+				System.out.println("Tachyon CTA Button is getting displayed on View Cart Page");
+
+				ctaBtnStatus_ViewCart = "PASS";
+			}
+
+			else {
+
+				System.out.println("View Cart Section is visible but Tachyon CTA Button is not");
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("Tachyon CTA button is not present on View Cart Page");
+
+			ctaBtnStatus_ViewCart = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_ViewCart);
+
+		Read_Write_Excel_Tachyon obj = new Read_Write_Excel_Tachyon();
+
+		obj.ReadExcelLoginMethodStatusCheck(statusList, merchantName);
 
 	}
 

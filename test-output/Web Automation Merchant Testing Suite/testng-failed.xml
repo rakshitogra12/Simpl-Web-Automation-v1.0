@@ -3,14 +3,14 @@
 <suite name="Failed suite [Web Automation Merchant Testing Suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Daily Reports - Integration Tests(failed)">
     <classes>
-      <class name="plTestScripts.FreshMenuTestScript">
+      <class name="plTestScripts.TenderCutsTestScript">
         <methods>
           <include name="teardown"/>
           <include name="setup"/>
-          <include name="FreshMenuTestMethodForSuccessfullScenario"/>
+          <include name="TenderCutsTestMethodForSuccessTransactionScenario"/>
           <include name="takeSnapShot"/>
         </methods>
-      </class> <!-- plTestScripts.FreshMenuTestScript -->
+      </class> <!-- plTestScripts.TenderCutsTestScript -->
     </classes>
   </test> <!-- Daily Reports - Integration Tests(failed) -->
 </suite> <!-- Failed suite [Web Automation Merchant Testing Suite] -->

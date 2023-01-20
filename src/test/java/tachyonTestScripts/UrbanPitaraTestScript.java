@@ -2,17 +2,22 @@ package tachyonTestScripts;
 
 import java.io.File;
 import java.time.Duration;
+import java.util.ArrayList;
+
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import commonMethods.BaseClass;
 import commonMethods.ReadConfig;
+import commonMethods.Read_Write_Excel_Tachyon;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WindowType;
 
 public class UrbanPitaraTestScript extends BaseClass {
 
@@ -479,4 +484,186 @@ public class UrbanPitaraTestScript extends BaseClass {
 		}
 
 	}
+
+	@Test(priority = 6)
+	public void UrbanPitaraMethodCTAButtonStatusCheck() throws Exception {
+
+		String merchantName = "Urban Pitara";
+
+		String ctaBtnStatus_PDP = null;
+
+		String ctaBtnStatus_Ajax = null;
+
+		String ctaBtnStatus_Cart = null;
+
+		ArrayList<String> statusList = new ArrayList<String>();
+
+		driver.get(readconfig.geturbanPitaraURL());
+
+		driver.manage().window().maximize();
+
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+				driver.findElement(By.cssSelector("div[id='mypopup']>span")));
+		
+		new WebDriverWait(driver, Duration.ofSeconds(20))
+				.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(By.cssSelector("iframe[id='cmessage_form_iframe']")));
+				
+		new WebDriverWait(driver, Duration.ofSeconds(20))
+				.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='close_icon']")));
+
+		driver.findElement(By.xpath("//div[@class='close_icon']")).click();
+		
+		driver.switchTo().defaultContent();
+		
+		new WebDriverWait(driver, Duration.ofSeconds(20))
+		.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[class='loox-pn-close']")));
+		
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();",
+				driver.findElement(By.cssSelector("a[class='loox-pn-close']")));
+				
+		new WebDriverWait(driver, Duration.ofSeconds(20))
+				.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Shoes')])[1]")));
+
+		driver.findElement(By.xpath("(//span[contains(text(),'Shoes')])[1]")).click();
+
+		driver.findElement(By.xpath("//span[contains(text(),'Flip Flops Store sale only')]")).click();
+
+		if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[2]")).isDisplayed()) {
+
+			System.out.println("Tachyon CTA Button is getting displayed on PDP Page");
+
+			ctaBtnStatus_PDP = "PASS";
+
+		} else {
+
+			System.out.println("Tachyon CTA Button is not getting displayed on PDP Page");
+
+			ctaBtnStatus_PDP = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_PDP);
+
+		driver.findElement(By.cssSelector("button[name=\"add\"]")).click();
+
+		if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[2]")).isDisplayed()) {
+
+			System.out.println("Tachyon CTA Button is getting displayed on Ajax Cart Page");
+
+			ctaBtnStatus_Ajax = "PASS";
+
+		} else {
+
+			System.out.println("Tachyon CTA Button is not getting displayed on Ajax Page");
+
+			ctaBtnStatus_Ajax = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Ajax);
+
+		Thread.sleep(6000);
+
+		driver.switchTo().newWindow(WindowType.TAB);
+
+		driver.get("https://urbanpitara.com/cart");
+
+		if (driver.findElement(By.xpath("//button[@id='simpl_buynow-button']")).isDisplayed()) {
+
+			System.out.println("Tachyon CTA Button is getting displayed on View Cart Page");
+
+			ctaBtnStatus_Cart = "PASS";
+
+		} else {
+
+			System.out.println("Tachyon CTA Button is not getting displayed on View Cart Page");
+
+			ctaBtnStatus_Cart = "FAIL";
+
+		}
+
+		statusList.add(ctaBtnStatus_Cart);
+
+		Read_Write_Excel_Tachyon obj = new Read_Write_Excel_Tachyon();
+
+		obj.ReadExcelLoginMethodStatusCheck(statusList, merchantName);
+
+	}
+
+	@Test(priority = 7)
+	public void UrbanPitaraMethodCTAButtonTextCapturing() throws Exception {
+
+		String merchantName = "Urban Pitara";
+
+		String ctaBtnText_PDP = null;
+
+		String ctaBtnText_Ajax = null;
+
+		String ctaBtnText_Cart = null;
+
+		ArrayList<String> textList = new ArrayList<String>();
+
+		driver.get(readconfig.geturbanPitaraURL());
+
+		driver.manage().window().maximize();
+
+		new WebDriverWait(driver, Duration.ofSeconds(20))
+				.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[contains(text(),'Shoes')])[1]")));
+
+		driver.findElement(By.xpath("(//span[contains(text(),'Shoes')])[1]")).click();
+
+		driver.findElement(By.xpath("//span[contains(text(),'Flip Flops Store sale only')]")).click();
+
+		if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[2]")).isDisplayed()) {
+
+			ctaBtnText_PDP = (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[2]")).getText());
+
+		} else {
+
+			System.out.println("Tachyon CTA Button is not getting displayed on PDP Page");
+
+		}
+
+		textList.add(ctaBtnText_PDP);
+
+		driver.findElement(By.cssSelector("button[name=\"add\"]")).click();
+
+		if (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[2]")).isDisplayed()) {
+
+			ctaBtnText_Ajax = (driver.findElement(By.xpath("(//button[@id='simpl_buynow-button'])[2]")).getText());
+
+		} else {
+
+			System.out.println("Tachyon CTA Button is not getting displayed on Ajax Page");
+
+		}
+
+		textList.add(ctaBtnText_Ajax);
+
+		Thread.sleep(6000);
+
+		driver.switchTo().newWindow(WindowType.TAB);
+
+		driver.get("https://urbanpitara.com/cart");
+
+		if (driver.findElement(By.xpath("//button[@id='simpl_buynow-button']")).isDisplayed()) {
+
+			ctaBtnText_Cart = (driver.findElement(By.xpath("//button[@id='simpl_buynow-button']")).getText());
+
+			System.out.println("Tachyon CTA Button is getting displayed on View Cart Page");
+
+		} else {
+
+			System.out.println("Tachyon CTA Button is not getting displayed on View Cart Page");
+
+		}
+
+		textList.add(ctaBtnText_Cart);
+
+		Read_Write_Excel_Tachyon obj = new Read_Write_Excel_Tachyon();
+
+		obj.ReadExcelLoginMethodTextCapturing(textList, merchantName);
+
+	}
+
 }
